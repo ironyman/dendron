@@ -302,12 +302,16 @@ export async function _activate(
     context.subscriptions.push(setupHelpFeedbackTreeView());
     context.subscriptions.push(setupRecentWorkspacesTreeView());
 
-    if (await DendronExtension.isDendronWorkspace()) {
+    if (
+      (await DendronExtension.isDendronWorkspace()) ||
+      (await DendronExtension.defaultWorkspace()) !== ""
+    ) {
       const activator = new WorkspaceActivator();
-      const maybeWsRoot = await activator.getOrPromptWsRoot({
-        ext: ws,
-        context,
-      });
+      const maybeWsRoot =
+        (await activator.getOrPromptWsRoot({
+          ext: ws,
+          context,
+        })) || (await DendronExtension.defaultWorkspace());
       if (!maybeWsRoot) {
         return false;
       }

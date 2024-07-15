@@ -679,7 +679,12 @@ export class WorkspaceActivator {
       }
       return resp;
     } else {
-      return path.dirname(DendronExtension.workspaceFile().fsPath);
+      const ws = DendronExtension.tryWorkspaceFile();
+      if (ws) {
+        return path.dirname(ws.fsPath);
+      } else {
+        return undefined;
+      }
     }
   }
 

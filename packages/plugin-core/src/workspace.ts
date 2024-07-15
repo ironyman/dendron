@@ -293,6 +293,12 @@ export class DendronExtension implements IDendronExtension {
     }
   }
 
+  static async defaultWorkspace(): Promise<string> {
+    return vscode.workspace
+      .getConfiguration("dendron")
+      .get("defaultWorkspaceDir", "");
+  }
+
   /**
    * @deprecated: For static access, use ExtensionProvider.isActive().
    * Or preferably pass IDendronExtension to constructors of your classes.
@@ -582,7 +588,7 @@ export class DendronExtension implements IDendronExtension {
 
     const backlinksTreeDataProvider = new BacklinksTreeDataProvider(
       this.getEngine(),
-      config,
+      config
     );
 
     const backlinkTreeView = vscode.window.createTreeView(

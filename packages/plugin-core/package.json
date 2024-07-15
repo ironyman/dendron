@@ -1311,6 +1311,11 @@
           "default": "",
           "description": "DEPRECATED. Use journal settings in dendron.yml"
         },
+        "dendron.defaultWorkspaceDir": {
+          "type": "string",
+          "default": "",
+          "description": "default location of dendron workspace"
+        },
         "dendron.logLevel": {
           "type": "string",
           "default": "info",
