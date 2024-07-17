@@ -447,7 +447,8 @@ export class DevCLICommand extends CLICommand<CommandOpts, CommandOutput> {
       this.print("skipping type-check...");
     }
 
-    this.bumpVersion(opts);
+    // Do not make a new commit for every build.
+    // this.bumpVersion(opts);
 
     this.print("publish version...");
     await LernaUtils.publishVersion(opts.publishEndpoint);
@@ -471,8 +472,9 @@ export class DevCLICommand extends CLICommand<CommandOpts, CommandOutput> {
       await TimeUtils.sleep(localSleepSeconds * 1000);
     }
 
-    this.print("install deps...");
-    BuildUtils.installPluginDependencies();
+    // Installing dependencies like this errors.
+    // this.print("install deps...");
+    // BuildUtils.installPluginDependencies();
 
     this.print("compiling plugin...");
     await BuildUtils.compilePlugin(opts);
